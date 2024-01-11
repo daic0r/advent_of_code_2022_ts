@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 
 const input: string[] = readFileSync('./input.txt', 'utf8').split('\n');
 
-let crates: string[] = [];
+const crates: string[] = [];
 let line_instr;
 for (let i = 0; i < input.length; ++i) {
    if (input[i].length === 0) {
@@ -22,13 +22,13 @@ const cnt = (() => {
    return cnt;
 })();
 
-let stacks: string[][] = [];
+const stacks: string[][] = [];
 for (let i = 0; i < cnt; ++i)
    stacks.push([]);
 
 for (let i = 1; i < crates.length; ++i) {
    for (let j = 0; j < cnt; ++j) {
-      let crate_str = crates[i].substr(j * 4, 3);
+      const crate_str = crates[i].substr(j * 4, 3);
       if (crate_str.trim().length !== 0)
          stacks[j].push(crate_str[1]);
    }
@@ -37,11 +37,11 @@ for (let i = 1; i < crates.length; ++i) {
 console.log(stacks);
 
 for (let i = line_instr; i < input.length - 1; ++i) {
-   let rex = /move (\d+) from (\d+) to (\d+)/;
-   let captures = rex.exec(input[i]);
-   let how_many = parseInt(captures[1]);
-   let from = parseInt(captures[2]);
-   let to = parseInt(captures[3]);
+   const rex = /move (\d+) from (\d+) to (\d+)/;
+   const captures = rex.exec(input[i]);
+   const how_many = parseInt(captures[1]);
+   const from = parseInt(captures[2]);
+   const to = parseInt(captures[3]);
    const moved = stacks[from-1].slice(-how_many);
    stacks[from-1] = stacks[from-1].slice(0, stacks[from-1].length - how_many);
    stacks[to-1].push(...moved);
